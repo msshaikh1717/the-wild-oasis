@@ -1,57 +1,25 @@
-import styled from "styled-components";
+const StyledPagination = ({ children }) => (
+  <div className="w-full flex items-center justify-between">{children}</div>
+);
 
-const StyledPagination = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+const P = ({ children }) => (
+  <p className="text-[1.4rem] ml-[0.8rem] [&_span]:font-semibold">{children}</p>
+);
 
-const P = styled.p`
-  font-size: 1.4rem;
-  margin-left: 0.8rem;
+const Buttons = ({ children }) => (
+  <div className="flex gap-[0.6rem]">{children}</div>
+);
 
-  & span {
-    font-weight: 600;
-  }
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  gap: 0.6rem;
-`;
-
-const PaginationButton = styled.button`
-  background-color: ${(props) =>
-    props.active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
-  color: ${(props) => (props.active ? " var(--color-brand-50)" : "inherit")};
-  border: none;
-  border-radius: var(--border-radius-sm);
-  font-weight: 500;
-  font-size: 1.4rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1.2rem;
-  transition: all 0.3s;
-
-  &:has(span:last-child) {
-    padding-left: 0.4rem;
-  }
-
-  &:has(span:first-child) {
-    padding-right: 0.4rem;
-  }
-
-  & svg {
-    height: 1.8rem;
-    width: 1.8rem;
-  }
-
-  &:hover:not(:disabled) {
-    background-color: var(--color-brand-600);
-    color: var(--color-brand-50);
-  }
-`;
+const PaginationButton = ({ active, children, onClick, disabled }) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={`border-none rounded-[var(--border-radius-sm)] font-medium text-[1.4rem] flex items-center justify-center gap-[0.4rem] p-[0.6rem_1.2rem] transition-all duration-300 [&:has(span:last-child)]:pl-[0.4rem] [&:has(span:first-child)]:pr-[0.4rem] [&_svg]:h-[1.8rem] [&_svg]:w-[1.8rem] hover:not(:disabled):bg-[var(--color-brand-600)] hover:not(:disabled):text-[var(--color-brand-50)] ${
+      active
+        ? "bg-[var(--color-brand-600)] text-[var(--color-brand-50)]"
+        : "bg-[var(--color-grey-50)] text-inherit"
+    }`}
+  >
+    {children}
+  </button>
+);

@@ -1,8 +1,9 @@
-import styled from "styled-components";
+function DashboardLayout({ children }) {
+  return (
+    <div className="grid grid-cols-4 grid-rows-[auto_34rem_auto] gap-[2.4rem]">
+      {children}
+    </div>
+  );
+}
 
-const StyledDashboardLayout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto 34rem auto;
-  gap: 2.4rem;
-`;
+export default DashboardLayout;

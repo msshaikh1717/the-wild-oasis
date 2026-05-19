@@ -1,15 +1,12 @@
-import styled from "styled-components";
 import DashboardBox from "./DashboardBox";
 
-const StyledSalesChart = styled(DashboardBox)`
-  grid-column: 1 / -1;
-
-  /* Hack to change grid line colors */
-  & .recharts-cartesian-grid-horizontal line,
-  & .recharts-cartesian-grid-vertical line {
-    stroke: var(--color-grey-300);
-  }
-`;
+function StyledSalesChart({ children }) {
+  return (
+    <DashboardBox className="col-span-full [&_.recharts-cartesian-grid-horizontal_line]:stroke-[var(--color-grey-300)] [&_.recharts-cartesian-grid-vertical_line]:stroke-[var(--color-grey-300)]">
+      {children}
+    </DashboardBox>
+  );
+}
 
 const fakeData = [
   { label: "Jan 09", totalSales: 480, extrasSales: 20 },
