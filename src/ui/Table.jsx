@@ -1,60 +1,64 @@
-import styled from "styled-components";
+import React from 'react';
 
-const StyledTable = styled.div`
-  border: 1px solid var(--color-grey-200);
+export function Table({ children }) {
+  return (
+    <div
+      role="table"
+      className="border border-[var(--color-grey-200)] text-[1.4rem] bg-[var(--color-grey-0)] rounded-[7px] overflow-hidden"
+    >
+      {children}
+    </div>
+  );
+}
 
-  font-size: 1.4rem;
-  background-color: var(--color-grey-0);
-  border-radius: 7px;
-  overflow: hidden;
-`;
+export function TableHeader({ columns, children }) {
+  return (
+    <header
+      role="row"
+      style={{ gridTemplateColumns: columns }}
+      className="grid gap-x-[2.4rem] items-center transition-none px-[2.4rem] py-[1.6rem] bg-[var(--color-grey-50)] border-b border-[var(--color-grey-100)] uppercase tracking-[0.4px] font-semibold text-[var(--color-grey-600)]"
+    >
+      {children}
+    </header>
+  );
+}
 
-const CommonRow = styled.div`
-  display: grid;
-  grid-template-columns: ${(props) => props.columns};
-  column-gap: 2.4rem;
-  align-items: center;
-  transition: none;
-`;
+export function TableRow({ columns, children }) {
+  return (
+    <div
+      role="row"
+      style={{ gridTemplateColumns: columns }}
+      className="grid gap-x-[2.4rem] items-center transition-none px-[2.4rem] py-[1.2rem] [&:not(:last-child)]:border-b [&:not(:last-child)]:border-[var(--color-grey-100)]"
+    >
+      {children}
+    </div>
+  );
+}
 
-const StyledHeader = styled(CommonRow)`
-  padding: 1.6rem 2.4rem;
+export function TableBody({ children }) {
+  return <section className="my-[0.4rem]">{children}</section>;
+}
 
-  background-color: var(--color-grey-50);
-  border-bottom: 1px solid var(--color-grey-100);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  font-weight: 600;
-  color: var(--color-grey-600);
-`;
+export function TableFooter({ children }) {
+  return (
+    <footer className="bg-[var(--color-grey-50)] flex justify-center p-[1.2rem] empty:hidden">
+      {children}
+    </footer>
+  );
+}
 
-const StyledRow = styled(CommonRow)`
-  padding: 1.2rem 2.4rem;
+export function TableEmpty({ children }) {
+  return (
+    <p className="text-[1.6rem] font-medium text-center m-[2.4rem]">
+      {children}
+    </p>
+  );
+}
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
+Table.Header = TableHeader;
+Table.Row = TableRow;
+Table.Body = TableBody;
+Table.Footer = TableFooter;
+Table.Empty = TableEmpty;
 
-const StyledBody = styled.section`
-  margin: 0.4rem 0;
-`;
-
-const Footer = styled.footer`
-  background-color: var(--color-grey-50);
-  display: flex;
-  justify-content: center;
-  padding: 1.2rem;
-
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
-  &:not(:has(*)) {
-    display: none;
-  }
-`;
-
-const Empty = styled.p`
-  font-size: 1.6rem;
-  font-weight: 500;
-  text-align: center;
-  margin: 2.4rem;
-`;
+export default Table;

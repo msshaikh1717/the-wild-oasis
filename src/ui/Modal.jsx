@@ -1,50 +1,20 @@
-import styled from "styled-components";
+const StyledModal = ({ children }) => (
+  <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--color-grey-0)] rounded-[var(--border-radius-lg)] shadow-[var(--shadow-lg)] p-[3.2rem_4rem] transition-all duration-500">
+    {children}
+  </div>
+);
 
-const StyledModal = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--color-grey-0);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
-  transition: all 0.5s;
-`;
+const Overlay = ({ children }) => (
+  <div className="fixed top-0 left-0 w-full h-screen bg-[var(--backdrop-color)] backdrop-blur-[4px] z-[1000] transition-all duration-500">
+    {children}
+  </div>
+);
 
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--backdrop-color);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
-  transition: all 0.5s;
-`;
-
-const Button = styled.button`
-  background: none;
-  border: none;
-  padding: 0.4rem;
-  border-radius: var(--border-radius-sm);
-  transform: translateX(0.8rem);
-  transition: all 0.2s;
-  position: absolute;
-  top: 1.2rem;
-  right: 1.9rem;
-
-  &:hover {
-    background-color: var(--color-grey-100);
-  }
-
-  & svg {
-    width: 2.4rem;
-    height: 2.4rem;
-    /* Sometimes we need both */
-    /* fill: var(--color-grey-500);
-    stroke: var(--color-grey-500); */
-    color: var(--color-grey-500);
-  }
-`;
+const Button = ({ children, onClick }) => (
+  <button
+    onClick={onClick}
+    className="bg-none border-none p-[0.4rem] rounded-[var(--border-radius-sm)] translate-x-[0.8rem] transition-all duration-200 absolute top-[1.2rem] right-[1.9rem] hover:bg-[var(--color-grey-100)] [&_svg]:w-[2.4rem] [&_svg]:h-[2.4rem] [&_svg]:text-[var(--color-grey-500)]"
+  >
+    {children}
+  </button>
+);

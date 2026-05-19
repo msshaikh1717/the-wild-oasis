@@ -1,15 +1,22 @@
-import styled from "styled-components";
+function Select({ options, value, onChange, type, ...props }) {
+  return (
+    <select
+      className={`text-[1.4rem] p-[0.8rem_1.2rem] border rounded-[var(--border-radius-sm)] bg-[var(--color-grey-0)] font-medium shadow-[var(--shadow-sm)] ${
+        type === "white"
+          ? "border-[var(--color-grey-100)]"
+          : "border-[var(--color-grey-300)]"
+      }`}
+      value={value}
+      onChange={onChange}
+      {...props}
+    >
+      {options.map((option) => (
+        <option value={option.value} key={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  );
+}
 
-const StyledSelect = styled.select`
-  font-size: 1.4rem;
-  padding: 0.8rem 1.2rem;
-  border: 1px solid
-    ${(props) =>
-      props.type === "white"
-        ? "var(--color-grey-100)"
-        : "var(--color-grey-300)"};
-  border-radius: var(--border-radius-sm);
-  background-color: var(--color-grey-0);
-  font-weight: 500;
-  box-shadow: var(--shadow-sm);
-`;
+export default Select;

@@ -1,22 +1,11 @@
-import styled from "styled-components";
 
-const ChartBox = styled.div`
-  /* Box */
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-
-  padding: 2.4rem 3.2rem;
-  grid-column: 3 / span 2;
-
-  & > *:first-child {
-    margin-bottom: 1.6rem;
-  }
-
-  & .recharts-pie-label-text {
-    font-weight: 600;
-  }
-`;
+function ChartBox({ children }) {
+  return (
+    <div className="bg-[var(--color-grey-0)] border border-[var(--color-grey-100)] rounded-[var(--border-radius-md)] p-[2.4rem_3.2rem] col-[3/span_2] [&>*:first-child]:mb-[1.6rem] [&_.recharts-pie-label-text]:font-semibold">
+      {children}
+    </div>
+  );
+}
 
 const startDataLight = [
   {

@@ -1,40 +1,37 @@
-import styled from "styled-components";
+export function TableRow({ children }) {
+  return (
+    <div className="grid grid-cols-[0.6fr_1.8fr_2.2fr_1fr_1fr_1fr] gap-x-[2.4rem] items-center p-[1.4rem_2.4rem] [&:not(:last-child)]:border-b [&:not(:last-child)]:border-[var(--color-grey-100)]">
+      {children}
+    </div>
+  );
+}
 
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
+export function Img({ src, alt }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="block w-[6.4rem] aspect-[3/2] object-cover object-center scale-150 -translate-x-[7px]"
+    />
+  );
+}
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
+export function Cabin({ children }) {
+  return (
+    <div className="text-[1.6rem] font-semibold text-[var(--color-grey-600)] font-['Sono']">
+      {children}
+    </div>
+  );
+}
 
-const Img = styled.img`
-  display: block;
-  width: 6.4rem;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.5) translateX(-7px);
-`;
+export function Price({ children }) {
+  return <div className="font-['Sono'] font-semibold">{children}</div>;
+}
 
-const Cabin = styled.div`
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--color-grey-600);
-  font-family: "Sono";
-`;
-
-const Price = styled.div`
-  font-family: "Sono";
-  font-weight: 600;
-`;
-
-const Discount = styled.div`
-  font-family: "Sono";
-  font-weight: 500;
-  color: var(--color-green-700);
-`;
+export function Discount({ children }) {
+  return (
+    <div className="font-['Sono'] font-medium text-[var(--color-green-700)]">
+      {children}
+    </div>
+  );
+}

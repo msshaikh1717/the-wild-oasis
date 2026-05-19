@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { format, isToday } from "date-fns";
 import {
   HiOutlineChatBubbleBottomCenterText,
@@ -11,95 +10,6 @@ import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
-
-const StyledBookingDataBox = styled.section`
-  /* Box */
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-
-  overflow: hidden;
-`;
-
-const Header = styled.header`
-  background-color: var(--color-brand-500);
-  padding: 2rem 4rem;
-  color: #e0e7ff;
-  font-size: 1.8rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  svg {
-    height: 3.2rem;
-    width: 3.2rem;
-  }
-
-  & div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-    font-weight: 600;
-    font-size: 1.8rem;
-  }
-
-  & span {
-    font-family: "Sono";
-    font-size: 2rem;
-    margin-left: 4px;
-  }
-`;
-
-const Section = styled.section`
-  padding: 3.2rem 4rem 1.2rem;
-`;
-
-const Guest = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 1.6rem;
-  color: var(--color-grey-500);
-
-  & p:first-of-type {
-    font-weight: 500;
-    color: var(--color-grey-700);
-  }
-`;
-
-const Price = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.6rem 3.2rem;
-  border-radius: var(--border-radius-sm);
-  margin-top: 2.4rem;
-
-  background-color: ${(props) =>
-    props.isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
-  color: ${(props) =>
-    props.isPaid ? "var(--color-green-700)" : "var(--color-yellow-700)"};
-
-  & p:last-child {
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
-
-  svg {
-    height: 2.4rem;
-    width: 2.4rem;
-    color: currentColor !important;
-  }
-`;
-
-const Footer = styled.footer`
-  padding: 1.6rem 4rem;
-  font-size: 1.2rem;
-  color: var(--color-grey-500);
-  text-align: right;
-`;
 
 // A purely presentational component
 function BookingDataBox({ booking }) {
@@ -120,8 +30,8 @@ function BookingDataBox({ booking }) {
   } = booking;
 
   return (
-    <StyledBookingDataBox>
-      <Header>
+    <section className="bg-[var(--color-grey-0)] border border-[var(--color-grey-100)] rounded-[var(--border-radius-md)] overflow-hidden">
+      <header className="bg-[var(--color-brand-500)] p-[2rem_4rem] text-[#e0e7ff] text-[1.8rem] font-medium flex items-center justify-between [&_svg]:h-[3.2rem] [&_svg]:w-[3.2rem] [&_div:first-child]:flex [&_div:first-child]:items-center [&_div:first-child]:gap-[1.6rem] [&_div:first-child]:font-semibold [&_div:first-child]:text-[1.8rem] [&_span]:font-['Sono'] [&_span]:text-[2rem] [&_span]:ml-[4px]">
         <div>
           <HiOutlineHomeModern />
           <p>
@@ -136,10 +46,10 @@ function BookingDataBox({ booking }) {
             : formatDistanceFromNow(startDate)}
           ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
         </p>
-      </Header>
+      </header>
 
-      <Section>
-        <Guest>
+      <section className="p-[3.2rem_4rem_1.2rem]">
+        <div className="flex items-center gap-[1.2rem] mb-[1.6rem] text-[var(--color-grey-500)] [&_p:first-of-type]:font-medium [&_p:first-of-type]:text-[var(--color-grey-700)]">
           {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
           <p>
             {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
@@ -148,7 +58,7 @@ function BookingDataBox({ booking }) {
           <p>{email}</p>
           <span>&bull;</span>
           <p>National ID {nationalID}</p>
-        </Guest>
+        </div>
 
         {observations && (
           <DataItem
@@ -163,7 +73,7 @@ function BookingDataBox({ booking }) {
           {hasBreakfast ? "Yes" : "No"}
         </DataItem>
 
-        <Price isPaid={isPaid}>
+        <div className={`flex items-center justify-between p-[1.6rem_3.2rem] rounded-[var(--border-radius-sm)] mt-[2.4rem] [&_p:last-child]:uppercase [&_p:last-child]:text-[1.4rem] [&_p:last-child]:font-semibold [&_svg]:h-[2.4rem] [&_svg]:w-[2.4rem] [&_svg]:text-current! ${isPaid ? "bg-[var(--color-green-100)] text-[var(--color-green-700)]" : "bg-[var(--color-yellow-100)] text-[var(--color-yellow-700)]"}`}>
           <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
             {formatCurrency(totalPrice)}
 
@@ -174,13 +84,13 @@ function BookingDataBox({ booking }) {
           </DataItem>
 
           <p>{isPaid ? "Paid" : "Will pay at property"}</p>
-        </Price>
-      </Section>
+        </div>
+      </section>
 
-      <Footer>
+      <footer className="p-[1.6rem_4rem] text-[1.2rem] text-[var(--color-grey-500)] text-right">
         <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
-      </Footer>
-    </StyledBookingDataBox>
+      </footer>
+    </section>
   );
 }
 

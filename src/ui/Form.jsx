@@ -1,25 +1,10 @@
-import styled, { css } from "styled-components";
+function Form({ type, className = "", ...props }) {
+  const baseClasses = "overflow-hidden text-[1.4rem]";
+  const modalClasses = type === "modal" ? "w-[80rem]" : "p-[2.4rem_4rem] bg-(--color-grey-0) border border-(--color-grey-100) rounded-(--border-radius-md)";
+  
+  const combinedClasses = `${baseClasses} ${modalClasses} ${className}`.trim();
 
-const Form = styled.form`
-  ${(props) =>
-    props.type !== "modal" &&
-    css`
-      padding: 2.4rem 4rem;
-
-      /* Box */
-      background-color: var(--color-grey-0);
-      border: 1px solid var(--color-grey-100);
-      border-radius: var(--border-radius-md);
-    `}
-
-  ${(props) =>
-    props.type === "modal" &&
-    css`
-      width: 80rem;
-    `}
-    
-  overflow: hidden;
-  font-size: 1.4rem;
-`;
+  return <form className={combinedClasses} {...props} />;
+}
 
 export default Form;

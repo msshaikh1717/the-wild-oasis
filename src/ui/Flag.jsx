@@ -1,8 +1,10 @@
-import styled from "styled-components";
+function Flag(props) {
+  return (
+    <img
+      className="max-w-[2rem] rounded-[var(--border-radius-tiny)] block border border-[var(--color-grey-100)]"
+      {...props}
+    />
+  );
+}
 
-export const Flag = styled.img`
-  max-width: 2rem;
-  border-radius: var(--border-radius-tiny);
-  display: block;
-  border: 1px solid var(--color-grey-100);
-`;
+export default Flag;

@@ -1,62 +1,48 @@
-import styled from "styled-components";
+import React from 'react';
 
-const StyledMenu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
+export function Menus({ children }) {
+  return (
+    <div className="flex items-center justify-end">
+      {children}
+    </div>
+  );
+}
 
-const StyledToggle = styled.button`
-  background: none;
-  border: none;
-  padding: 0.4rem;
-  border-radius: var(--border-radius-sm);
-  transform: translateX(0.8rem);
-  transition: all 0.2s;
+export function MenuToggle({ onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className="bg-none border-none p-[0.4rem] rounded-[var(--border-radius-sm)] translate-x-[0.8rem] transition-all duration-200 hover:bg-[var(--color-grey-100)] [&_svg]:w-[2.4rem] [&_svg]:h-[2.4rem] [&_svg]:text-[var(--color-grey-700)]"
+    >
+      {children}
+    </button>
+  );
+}
 
-  &:hover {
-    background-color: var(--color-grey-100);
-  }
+export function MenuList({ position, children }) {
+  return (
+    <ul
+      style={{ right: `${position.x}px`, top: `${position.y}px` }}
+      className="fixed bg-[var(--color-grey-0)] shadow-[var(--shadow-md)] rounded-[var(--border-radius-md)]"
+    >
+      {children}
+    </ul>
+  );
+}
 
-  & svg {
-    width: 2.4rem;
-    height: 2.4rem;
-    color: var(--color-grey-700);
-  }
-`;
+export function MenuButton({ onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-full text-left bg-none border-none p-[1.2rem_2.4rem] text-[1.4rem] transition-all duration-200 flex items-center gap-[1.6rem] hover:bg-[var(--color-grey-50)] [&_svg]:w-[1.6rem] [&_svg]:h-[1.6rem] [&_svg]:text-[var(--color-grey-400)] [&_svg]:transition-all [&_svg]:duration-300"
+    >
+      {children}
+    </button>
+  );
+}
 
-const StyledList = styled.ul`
-  position: fixed;
+Menus.Toggle = MenuToggle;
+Menus.List = MenuList;
+Menus.Button = MenuButton;
 
-  background-color: var(--color-grey-0);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--border-radius-md);
-
-  right: ${(props) => props.position.x}px;
-  top: ${(props) => props.position.y}px;
-`;
-
-const StyledButton = styled.button`
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  padding: 1.2rem 2.4rem;
-  font-size: 1.4rem;
-  transition: all 0.2s;
-
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
-
-  &:hover {
-    background-color: var(--color-grey-50);
-  }
-
-  & svg {
-    width: 1.6rem;
-    height: 1.6rem;
-    color: var(--color-grey-400);
-    transition: all 0.3s;
-  }
-`;
+export default Menus;
